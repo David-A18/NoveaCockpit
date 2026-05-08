@@ -279,21 +279,21 @@ python -m http.server 4174</pre>
           <div class="card span-6">
             <h2>Tour script</h2>
             <div class="list">
-              <div class="item">Start in Workbench and preview a plan.</div>
-              <div class="item">Approve the fake database-only draft step.</div>
-              <div class="item">Check Runtime and Models to see the local-first boundary.</div>
-              <div class="item">Use Interactions and Knowledge to understand the review workflow.</div>
+              <div class="item"><strong>1.</strong> Go to Workbench. Click <strong>Preview plan</strong>, then <strong>Approve draft step</strong>, then <strong>Reset demo</strong>.</div>
+              <div class="item"><strong>2.</strong> Open Runtime and Models to see the local-first boundary.</div>
+              <div class="item"><strong>3.</strong> Open Dashboard to see fake operational metrics.</div>
+              <div class="item"><strong>4.</strong> Open Interactions and Knowledge to understand the review workflow.</div>
             </div>
           </div>
           <div class="card span-12">
             <h2>What this teaches</h2>
             <div class="guide-grid">
-              <div class="item"><strong>Agent Workbench:</strong> local plans, approvals, and audit-friendly run status.</div>
+              <div class="item"><strong>Agent Workbench:</strong> local plans, approvals, and audit-friendly run status. Try Preview plan → Approve draft step → Reset demo.</div>
               <div class="item"><strong>Runtime:</strong> desktop health, local provider readiness, and bounded process behavior.</div>
               <div class="item"><strong>Interactions:</strong> imported assistant sessions and safe review summaries.</div>
+              <div class="item"><strong>Dashboard:</strong> fake operational metrics for runs, tokens, approvals, and error rate. In the private app these come from a local database.</div>
               <div class="item"><strong>Models:</strong> local model policy, approved model limits, and blocked oversized/cloud paths.</div>
-              <div class="item"><strong>Knowledge:</strong> local vault context and database-only draft behavior.</div>
-              <div class="item"><strong>Privacy:</strong> public demo data is fabricated and independent from the private product.</div>
+              <div class="item"><strong>Knowledge:</strong> local vault context. Drafts stay database-only until a user explicitly applies them to the vault file.</div>
             </div>
           </div>
         </div>
@@ -416,7 +416,11 @@ python -m http.server 4174</pre>
           </div>
           <div class="card span-7">
             <h2>Related Notes</h2>
-            <div class="list"><div class="item">Workbench planning references Runtime diagnostics.</div><div class="item">Interaction reports connect to model-routing decisions.</div><div class="item">Drafts stay in the database until manually applied.</div></div>
+            <div class="list">
+              <div class="item">Workbench planning references Runtime diagnostics.</div>
+              <div class="item">Interaction reports connect to model-routing decisions.</div>
+              <div class="item">Drafts stay in the database until a user explicitly applies them — the private app never writes to the vault automatically.</div>
+            </div>
           </div>
         </div>
       </section>
