@@ -8,33 +8,37 @@
     * { box-sizing: border-box; }
     :root {
       color-scheme: light;
-      --bg: #f4f7fb;
+      --bg: #eef4fb;
       --panel: #ffffff;
-      --panel-soft: #f8fafc;
-      --ink: #172033;
+      --panel-soft: #f7fafc;
+      --ink: #142033;
       --muted: #64748b;
-      --line: #dbe3ef;
-      --nav: #101828;
+      --line: #dbe5f2;
+      --nav: #0f172a;
       --nav-soft: #1e293b;
       --blue: #0ea5e9;
       --green: #16a34a;
       --amber: #d97706;
       --red: #dc2626;
+      --shadow: 0 18px 45px rgba(15, 23, 42, 0.08);
     }
     body {
       margin: 0;
       font-family: Inter, Arial, sans-serif;
       color: var(--ink);
-      background: var(--bg);
+      background:
+        radial-gradient(circle at top left, rgba(14, 165, 233, 0.18), transparent 34rem),
+        linear-gradient(180deg, #f8fbff 0%, var(--bg) 100%);
     }
     button, textarea, select, input { font: inherit; }
+    button { cursor: pointer; }
     .app {
       display: grid;
-      grid-template-columns: 266px minmax(0, 1fr);
+      grid-template-columns: 282px minmax(0, 1fr);
       min-height: 100vh;
     }
     .sidebar {
-      background: var(--nav);
+      background: linear-gradient(180deg, #0f172a 0%, #111827 100%);
       color: #f9fafb;
       padding: 22px;
       display: flex;
@@ -45,27 +49,56 @@
       display: flex;
       align-items: center;
       gap: 12px;
-      font-weight: 800;
+      font-weight: 850;
       font-size: 19px;
     }
     .mark {
-      width: 38px;
-      height: 38px;
-      border-radius: 10px;
+      width: 40px;
+      height: 40px;
+      border-radius: 11px;
       background: linear-gradient(135deg, #34d399, #38bdf8);
       display: grid;
       place-items: center;
       color: #082f49;
       font-weight: 900;
+      box-shadow: 0 12px 24px rgba(56, 189, 248, 0.2);
     }
     .sidebar-note {
-      border: 1px solid rgba(203, 213, 225, 0.18);
-      border-radius: 8px;
+      border: 1px solid rgba(203, 213, 225, 0.2);
+      border-radius: 10px;
       padding: 12px;
       color: #cbd5e1;
       font-size: 12px;
-      line-height: 1.45;
-      background: rgba(15, 23, 42, 0.48);
+      line-height: 1.5;
+      background: rgba(15, 23, 42, 0.56);
+    }
+    .progress-card {
+      border: 1px solid rgba(203, 213, 225, 0.2);
+      border-radius: 10px;
+      padding: 12px;
+      background: rgba(30, 41, 59, 0.62);
+    }
+    .progress-label {
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      color: #e2e8f0;
+      font-size: 12px;
+      font-weight: 800;
+      margin-bottom: 9px;
+    }
+    .progress-track {
+      height: 8px;
+      border-radius: 999px;
+      background: rgba(148, 163, 184, 0.25);
+      overflow: hidden;
+    }
+    .progress-track span {
+      display: block;
+      height: 100%;
+      width: 14%;
+      background: linear-gradient(90deg, #34d399, #38bdf8);
+      transition: width 0.22s ease;
     }
     .nav { display: grid; gap: 8px; }
     .nav button {
@@ -73,30 +106,93 @@
       background: transparent;
       color: #cbd5e1;
       padding: 11px 12px;
-      border-radius: 8px;
+      border-radius: 9px;
       text-align: left;
-      cursor: pointer;
-      font-weight: 700;
+      font-weight: 760;
+      transition: background 0.16s ease, color 0.16s ease, transform 0.16s ease;
     }
-    .nav button:hover,
-    .nav button.active { background: var(--nav-soft); color: #ffffff; }
-    main { padding: 26px; overflow: auto; }
+    .nav button:hover {
+      background: rgba(30, 41, 59, 0.72);
+      color: #ffffff;
+      transform: translateX(2px);
+    }
+    .nav button.active {
+      background: #f8fafc;
+      color: #0f172a;
+    }
+    .nav button.visited::after {
+      content: "done";
+      float: right;
+      color: #16a34a;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-top: 2px;
+    }
+    main {
+      padding: 28px;
+      overflow: auto;
+    }
+    .notice {
+      border: 1px solid #bae6fd;
+      background: #e0f2fe;
+      color: #075985;
+      border-radius: 10px;
+      padding: 12px 14px;
+      margin-bottom: 18px;
+      line-height: 1.45;
+      font-weight: 760;
+    }
     .topbar {
       display: flex;
       justify-content: space-between;
       gap: 18px;
       align-items: flex-start;
-      margin-bottom: 22px;
+      margin-bottom: 18px;
     }
-    h1 { margin: 0; font-size: 28px; letter-spacing: 0; }
-    h2 { margin: 0 0 12px; font-size: 15px; }
+    h1 {
+      margin: 0;
+      font-size: 30px;
+      letter-spacing: 0;
+    }
+    h2 {
+      margin: 0 0 12px;
+      font-size: 15px;
+    }
     p { margin: 0; }
-    a { color: #0369a1; font-weight: 700; }
+    a {
+      color: #0369a1;
+      font-weight: 760;
+    }
     .subtitle {
       color: var(--muted);
       margin-top: 6px;
-      max-width: 760px;
+      max-width: 780px;
+      line-height: 1.48;
+    }
+    .objective {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.8);
+      border-radius: 10px;
+      padding: 12px;
+      margin-bottom: 16px;
+      color: #334155;
       line-height: 1.45;
+    }
+    .objective strong {
+      color: #0f172a;
+    }
+    .dot {
+      flex: 0 0 auto;
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: var(--blue);
+      margin-top: 6px;
+      box-shadow: 0 0 0 5px rgba(14, 165, 233, 0.12);
     }
     .grid {
       display: grid;
@@ -106,9 +202,43 @@
     .card {
       background: var(--panel);
       border: 1px solid var(--line);
-      border-radius: 8px;
+      border-radius: 10px;
       padding: 16px;
-      box-shadow: 0 10px 28px rgba(15, 23, 42, 0.05);
+      box-shadow: var(--shadow);
+    }
+    .hero {
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(135deg, #0f172a 0%, #164e63 58%, #0f766e 100%);
+      color: #ffffff;
+      padding: 24px;
+      min-height: 250px;
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      width: 220px;
+      height: 220px;
+      right: -60px;
+      top: -60px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 999px;
+    }
+    .hero h2 {
+      font-size: 24px;
+      margin-bottom: 10px;
+      max-width: 660px;
+    }
+    .hero p {
+      color: #dbeafe;
+      line-height: 1.5;
+      max-width: 720px;
+    }
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 18px;
     }
     .span-3 { grid-column: span 3; }
     .span-4 { grid-column: span 4; }
@@ -120,17 +250,22 @@
     .metric {
       color: var(--muted);
       font-size: 12px;
-      font-weight: 800;
+      font-weight: 820;
       text-transform: uppercase;
+      letter-spacing: 0.04em;
     }
-    .value { font-size: 26px; font-weight: 900; margin-top: 8px; }
+    .value {
+      font-size: 28px;
+      font-weight: 900;
+      margin-top: 8px;
+    }
     .tag {
       display: inline-flex;
       align-items: center;
       border-radius: 999px;
       padding: 4px 8px;
       font-size: 12px;
-      font-weight: 800;
+      font-weight: 820;
       background: #e0f2fe;
       color: #075985;
       white-space: nowrap;
@@ -147,7 +282,12 @@
       font-size: 13px;
       vertical-align: top;
     }
-    th { color: var(--muted); font-size: 11px; text-transform: uppercase; }
+    th {
+      color: var(--muted);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
     .timeline { display: grid; gap: 10px; }
     .step {
       display: grid;
@@ -156,15 +296,24 @@
       align-items: center;
       padding: 11px;
       border: 1px solid #e2e8f0;
-      border-radius: 8px;
+      border-radius: 10px;
       background: #ffffff;
     }
-    .bar { height: 8px; background: #e2e8f0; border-radius: 999px; overflow: hidden; }
-    .bar span { display: block; height: 100%; background: var(--blue); }
+    .bar {
+      height: 8px;
+      background: #e2e8f0;
+      border-radius: 999px;
+      overflow: hidden;
+    }
+    .bar span {
+      display: block;
+      height: 100%;
+      background: linear-gradient(90deg, #0ea5e9, #16a34a);
+    }
     textarea, select, input {
       width: 100%;
       border: 1px solid #cbd5e1;
-      border-radius: 8px;
+      border-radius: 10px;
       padding: 10px;
       background: #ffffff;
       color: var(--ink);
@@ -174,28 +323,62 @@
       border: 0;
       background: #0f172a;
       color: #ffffff;
-      border-radius: 8px;
+      border-radius: 10px;
       padding: 10px 14px;
-      font-weight: 800;
+      font-weight: 820;
       cursor: pointer;
+      transition: transform 0.16s ease, opacity 0.16s ease;
     }
-    .button.secondary { background: #e2e8f0; color: #0f172a; }
+    .button:hover {
+      transform: translateY(-1px);
+    }
+    .button.secondary {
+      background: #e2e8f0;
+      color: #0f172a;
+    }
     .button.success { background: var(--green); }
-    .button-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
+    .button.light {
+      background: #ffffff;
+      color: #0f172a;
+    }
+    .button-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 12px;
+    }
     .section { display: none; }
     .section.active { display: block; }
     .list { display: grid; gap: 10px; }
     .item {
       padding: 12px;
       border: 1px solid #e2e8f0;
-      border-radius: 8px;
+      border-radius: 10px;
       background: var(--panel-soft);
       line-height: 1.45;
     }
-    .guide-grid {
+    .tour-grid {
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 12px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+    }
+    .tour-card {
+      border: 1px solid #dbe5f2;
+      border-radius: 10px;
+      padding: 12px;
+      background: #ffffff;
+      text-align: left;
+      color: var(--ink);
+      min-height: 108px;
+    }
+    .tour-card:hover {
+      border-color: #38bdf8;
+    }
+    .tour-card small {
+      display: block;
+      color: var(--muted);
+      line-height: 1.42;
+      margin-top: 6px;
     }
     .mono {
       font-family: "Cascadia Code", Consolas, monospace;
@@ -203,34 +386,50 @@
       background: #0f172a;
       color: #e2e8f0;
       padding: 10px;
-      border-radius: 8px;
+      border-radius: 10px;
       overflow-x: auto;
     }
-    .notice {
-      border: 1px solid #bae6fd;
-      background: #e0f2fe;
-      color: #075985;
-      border-radius: 8px;
-      padding: 12px;
-      margin-bottom: 16px;
-      line-height: 1.45;
-      font-weight: 700;
-    }
     .progress-log {
-      min-height: 44px;
+      min-height: 48px;
       border: 1px solid #e2e8f0;
-      border-radius: 8px;
+      border-radius: 10px;
       padding: 12px;
       background: #f8fafc;
       color: #334155;
       line-height: 1.45;
     }
-    @media (max-width: 960px) {
+    .result-panel {
+      display: none;
+      margin-top: 12px;
+      border: 1px solid #bae6fd;
+      background: #f0f9ff;
+      border-radius: 10px;
+      padding: 12px;
+      color: #0f172a;
+      line-height: 1.45;
+    }
+    .result-panel.visible { display: block; }
+    .mini-list {
+      margin: 10px 0 0;
+      padding-left: 18px;
+      color: #334155;
+    }
+    .snapshot {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+    @media (max-width: 1100px) {
+      .tour-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .span-3, .span-4 { grid-column: span 6; }
+    }
+    @media (max-width: 820px) {
       .app { grid-template-columns: 1fr; }
       .sidebar { position: static; }
+      main { padding: 18px; }
       .span-3, .span-4, .span-5, .span-6, .span-7, .span-8 { grid-column: span 12; }
       .topbar { flex-direction: column; }
-      .guide-grid { grid-template-columns: 1fr; }
+      .tour-grid, .snapshot { grid-template-columns: 1fr; }
       .step { grid-template-columns: 1fr; }
     }
   </style>
@@ -240,7 +439,11 @@
     <aside class="sidebar">
       <div class="brand"><div class="mark">N</div><div>NoveaCockpit</div></div>
       <div class="sidebar-note">
-        Public sample only. All data is fake. This page does not connect to an API, Ollama, local files, or the private app.
+        Public sample only. All data is fake. Nothing connects to an API, model, local file, or private runtime.
+      </div>
+      <div class="progress-card">
+        <div class="progress-label"><span>Demo progress</span><span id="progressText">1/7</span></div>
+        <div class="progress-track"><span id="progressFill"></span></div>
       </div>
       <nav class="nav">
         <button class="active" data-page="guide">Getting Started</button>
@@ -254,46 +457,45 @@
     </aside>
     <main>
       <div class="notice">
-        This is a static public preview for learning the product shape. It contains no private implementation, credentials, transcripts, logs, model outputs, or customer data.
+        Static public preview. The real desktop app stays private; this page teaches the product flow with fabricated data.
       </div>
 
       <section id="guide" class="section active">
         <div class="topbar">
           <div>
             <h1>Getting Started</h1>
-            <p class="subtitle">Use this sample GUI to understand the main NoveaCockpit workflows before seeing the private desktop app.</p>
+            <p class="subtitle">A short guided tour of the NoveaCockpit product shape: plan a run, review local runtime status, inspect interactions, and understand local model and knowledge boundaries.</p>
           </div>
           <span class="tag green">Fake-data tour</span>
         </div>
         <div class="grid">
-          <div class="card span-6">
-            <h2>Install the public demo</h2>
+          <div class="card hero span-12">
+            <h2>See how a local-first agent cockpit feels before installing the private app.</h2>
+            <p>Use the tour buttons below or the sidebar. The sample is intentionally static: no backend, no credentials, no model calls, and no private implementation.</p>
+            <div class="hero-actions">
+              <button class="button light" data-tour-page="workbench">Start tour</button>
+              <button class="button secondary" data-tour-page="dashboard">View dashboard</button>
+            </div>
+          </div>
+          <div class="card span-5">
+            <h2>Open the public demo</h2>
             <div class="list">
               <div class="item">Download or clone the public repository.</div>
               <div class="item">Open <strong>sample-gui/index.html</strong> in a browser.</div>
-              <div class="item">Optional: serve the folder locally for a browser-style URL.</div>
+              <div class="item">Optional: serve this folder for a browser-style URL.</div>
             </div>
             <pre class="mono">cd sample-gui
 python -m http.server 4174</pre>
           </div>
-          <div class="card span-6">
-            <h2>Tour script</h2>
-            <div class="list">
-              <div class="item"><strong>1.</strong> Go to Workbench. Click <strong>Preview plan</strong>, then <strong>Approve draft step</strong>, then <strong>Reset demo</strong>.</div>
-              <div class="item"><strong>2.</strong> Open Runtime and Models to see the local-first boundary.</div>
-              <div class="item"><strong>3.</strong> Open Dashboard to see fake operational metrics.</div>
-              <div class="item"><strong>4.</strong> Open Interactions and Knowledge to understand the review workflow.</div>
-            </div>
-          </div>
-          <div class="card span-12">
-            <h2>What this teaches</h2>
-            <div class="guide-grid">
-              <div class="item"><strong>Agent Workbench:</strong> local plans, approvals, and audit-friendly run status. Try Preview plan → Approve draft step → Reset demo.</div>
-              <div class="item"><strong>Runtime:</strong> desktop health, local provider readiness, and bounded process behavior.</div>
-              <div class="item"><strong>Interactions:</strong> imported assistant sessions and safe review summaries.</div>
-              <div class="item"><strong>Dashboard:</strong> fake operational metrics for runs, tokens, approvals, and error rate. In the private app these come from a local database.</div>
-              <div class="item"><strong>Models:</strong> local model policy, approved model limits, and blocked oversized/cloud paths.</div>
-              <div class="item"><strong>Knowledge:</strong> local vault context. Drafts stay database-only until a user explicitly applies them to the vault file.</div>
+          <div class="card span-7">
+            <h2>Suggested tour path</h2>
+            <div class="tour-grid">
+              <button class="tour-card" data-tour-page="workbench"><strong>1. Workbench</strong><small>Preview a plan, approve a fake draft, and see a sample output.</small></button>
+              <button class="tour-card" data-tour-page="runtime"><strong>2. Runtime</strong><small>Understand the local desktop supervisor and provider readiness.</small></button>
+              <button class="tour-card" data-tour-page="interactions"><strong>3. Interactions</strong><small>See how assistant sessions become reviewable records.</small></button>
+              <button class="tour-card" data-tour-page="dashboard"><strong>4. Dashboard</strong><small>Scan fake run, token, approval, and error metrics.</small></button>
+              <button class="tour-card" data-tour-page="models"><strong>5. Models</strong><small>Review local model policy and blocked oversized paths.</small></button>
+              <button class="tour-card" data-tour-page="knowledge"><strong>6. Knowledge</strong><small>See vault context and database-only drafts.</small></button>
             </div>
           </div>
         </div>
@@ -301,9 +503,10 @@ python -m http.server 4174</pre>
 
       <section id="workbench" class="section">
         <div class="topbar">
-          <div><h1>Agent Workbench</h1><p class="subtitle">Plan, approve, and audit local agent runs with fake sample data.</p></div>
-          <span class="tag green">Local demo</span>
+          <div><h1>Agent Workbench</h1><p class="subtitle">Plan, approve, and audit a local agent run using fake sample data.</p></div>
+          <span class="tag green">Try the buttons</span>
         </div>
+        <div class="objective"><span class="dot"></span><div><strong>Learning objective:</strong> see the approval-first workflow. The private app records plans, tool choices, approvals, and results before anything mutating happens.</div></div>
         <div class="grid">
           <div class="card span-5">
             <div class="metric">Goal</div>
@@ -318,6 +521,18 @@ python -m http.server 4174</pre>
               <button class="button secondary" id="resetPlan">Reset demo</button>
             </div>
             <div class="progress-log" id="workbenchLog" style="margin-top:12px">No sample action has been taken yet.</div>
+            <div class="result-panel" id="planSummary">
+              <strong>Fake plan summary</strong>
+              <ul class="mini-list">
+                <li>Collect imported interaction themes.</li>
+                <li>Check local model policy and approval requirements.</li>
+                <li>Prepare a database-only recommendation draft.</li>
+              </ul>
+            </div>
+            <div class="result-panel" id="reportPreview">
+              <strong>Fake final response</strong>
+              <p style="margin-top:8px">Recommended instruction: require explicit approval before database writes, show token usage in every run summary, and keep vault file edits manual.</p>
+            </div>
           </div>
           <div class="card span-7">
             <div class="metric">Run Plan</div>
@@ -327,19 +542,26 @@ python -m http.server 4174</pre>
               <div class="step"><strong>Draft</strong><div>Create a database-only recommendation report.</div><span class="tag amber" id="draftStatus">approval</span></div>
               <div class="step"><strong>Synthesis</strong><div>Return copyable instructions and audit notes.</div><span class="tag gray" id="synthesisStatus">queued</span></div>
             </div>
+            <div class="snapshot" style="margin-top:12px">
+              <div class="item"><strong>Model:</strong> qwen3:14b local policy sample</div>
+              <div class="item"><strong>Tools:</strong> related notes and DB-only draft</div>
+              <div class="item"><strong>Writes:</strong> approval required</div>
+              <div class="item"><strong>Vault files:</strong> never automatic</div>
+            </div>
           </div>
         </div>
       </section>
 
       <section id="runtime" class="section">
-        <div class="topbar"><div><h1>Runtime</h1><p class="subtitle">Desktop supervisor and local provider status preview.</p></div><span class="tag green">Healthy</span></div>
+        <div class="topbar"><div><h1>Runtime</h1><p class="subtitle">A preview of the desktop supervisor and local provider status concepts.</p></div><span class="tag green">Healthy sample</span></div>
+        <div class="objective"><span class="dot"></span><div><strong>Learning objective:</strong> understand that the private app runs locally, tracks its own health, and makes restart state visible instead of failing silently.</div></div>
         <div class="grid">
           <div class="card span-3"><div class="metric">API</div><div class="value">Healthy</div></div>
           <div class="card span-3"><div class="metric">Desktop</div><div class="value">Tray ready</div></div>
           <div class="card span-3"><div class="metric">Ollama</div><div class="value">Detected</div></div>
           <div class="card span-3"><div class="metric">Model</div><div class="value">14B</div></div>
           <div class="card span-12">
-            <h2>Supervisor Events</h2>
+            <h2>Supervisor events</h2>
             <div class="list">
               <div class="item">Window close hides to tray instead of stopping the runtime.</div>
               <div class="item">API restart is bounded, visible, and audited.</div>
@@ -350,7 +572,8 @@ python -m http.server 4174</pre>
       </section>
 
       <section id="interactions" class="section">
-        <div class="topbar"><div><h1>Interactions</h1><p class="subtitle">Mirror assistant sessions and generate local reports from approved imports.</p></div><span class="tag amber">Sample data</span></div>
+        <div class="topbar"><div><h1>Interactions</h1><p class="subtitle">A fake view of assistant sessions, tool calls, and generated local reports.</p></div><span class="tag amber">Sample data</span></div>
+        <div class="objective"><span class="dot"></span><div><strong>Learning objective:</strong> see how Codex, Claude, local notes, and report artifacts can become reviewable records without exposing private transcripts in the public demo.</div></div>
         <div class="grid">
           <div class="card span-4"><div class="metric">Imported sessions</div><div class="value">24</div></div>
           <div class="card span-4"><div class="metric">Tool calls</div><div class="value">71</div></div>
@@ -369,7 +592,8 @@ python -m http.server 4174</pre>
       </section>
 
       <section id="dashboard" class="section">
-        <div class="topbar"><div><h1>Dashboard</h1><p class="subtitle">Operational overview for local agent activity.</p></div><span class="tag gray">Demo metrics</span></div>
+        <div class="topbar"><div><h1>Dashboard</h1><p class="subtitle">A compact operational summary for fake local agent activity.</p></div><span class="tag gray">Demo metrics</span></div>
+        <div class="objective"><span class="dot"></span><div><strong>Learning objective:</strong> understand the high-level control surface: run volume, token usage, approval rate, errors, and local model activity.</div></div>
         <div class="grid">
           <div class="card span-3"><div class="metric">Runs</div><div class="value">1,248</div></div>
           <div class="card span-3"><div class="metric">Tokens</div><div class="value">8.6M</div></div>
@@ -385,6 +609,7 @@ python -m http.server 4174</pre>
 
       <section id="models" class="section">
         <div class="topbar"><div><h1>Models</h1><p class="subtitle">Approved local model inventory and routing policy preview.</p></div><span class="tag amber">Policy sample</span></div>
+        <div class="objective"><span class="dot"></span><div><strong>Learning objective:</strong> see the local-first model policy: approved small local models are allowed, oversized or cloud-backed paths are blocked for local validation.</div></div>
         <div class="grid">
           <div class="card span-12">
             <table>
@@ -408,18 +633,19 @@ python -m http.server 4174</pre>
       </section>
 
       <section id="knowledge" class="section">
-        <div class="topbar"><div><h1>Knowledge Graph</h1><p class="subtitle">Local vault graph preview with database-only drafts.</p></div><span class="tag gray">Static preview</span></div>
+        <div class="topbar"><div><h1>Knowledge Graph</h1><p class="subtitle">A static preview of local vault context and database-only drafts.</p></div><span class="tag gray">Static preview</span></div>
+        <div class="objective"><span class="dot"></span><div><strong>Learning objective:</strong> understand that local notes can provide context, while draft application remains a manual user action.</div></div>
         <div class="grid">
           <div class="card span-5">
             <h2>Notes</h2>
             <div class="list"><div class="item">Agent architecture</div><div class="item">Routing policy design</div><div class="item">Evaluation checklist</div></div>
           </div>
           <div class="card span-7">
-            <h2>Related Notes</h2>
+            <h2>Related notes</h2>
             <div class="list">
               <div class="item">Workbench planning references Runtime diagnostics.</div>
               <div class="item">Interaction reports connect to model-routing decisions.</div>
-              <div class="item">Drafts stay in the database until a user explicitly applies them — the private app never writes to the vault automatically.</div>
+              <div class="item">Drafts stay in the database until a user explicitly applies them - the private app never writes to the vault automatically.</div>
             </div>
           </div>
         </div>
@@ -429,17 +655,37 @@ python -m http.server 4174</pre>
   <script>
     const buttons = Array.from(document.querySelectorAll('.nav button'));
     const sections = Array.from(document.querySelectorAll('.section'));
+    const tourButtons = Array.from(document.querySelectorAll('[data-tour-page]'));
     const draftStatus = document.getElementById('draftStatus');
     const synthesisStatus = document.getElementById('synthesisStatus');
     const workbenchLog = document.getElementById('workbenchLog');
+    const progressText = document.getElementById('progressText');
+    const progressFill = document.getElementById('progressFill');
+    const planSummary = document.getElementById('planSummary');
+    const reportPreview = document.getElementById('reportPreview');
+    const visited = new Set(['guide']);
+
+    function updateProgress() {
+      const total = sections.length;
+      const count = visited.size;
+      progressText.textContent = count + '/' + total;
+      progressFill.style.width = Math.round((count / total) * 100) + '%';
+      buttons.forEach((item) => item.classList.toggle('visited', visited.has(item.dataset.page)));
+    }
 
     function setPage(page) {
+      visited.add(page);
       buttons.forEach((item) => item.classList.toggle('active', item.dataset.page === page));
       sections.forEach((section) => section.classList.toggle('active', section.id === page));
+      updateProgress();
     }
 
     buttons.forEach((button) => {
       button.addEventListener('click', () => setPage(button.dataset.page));
+    });
+
+    tourButtons.forEach((button) => {
+      button.addEventListener('click', () => setPage(button.dataset.tourPage));
     });
 
     document.getElementById('previewPlan').addEventListener('click', () => {
@@ -448,6 +694,8 @@ python -m http.server 4174</pre>
       draftStatus.className = 'tag amber';
       synthesisStatus.textContent = 'queued';
       synthesisStatus.className = 'tag gray';
+      planSummary.classList.add('visible');
+      reportPreview.classList.remove('visible');
     });
 
     document.getElementById('approveDraft').addEventListener('click', () => {
@@ -456,6 +704,8 @@ python -m http.server 4174</pre>
       draftStatus.className = 'tag green';
       synthesisStatus.textContent = 'ready';
       synthesisStatus.className = 'tag green';
+      planSummary.classList.add('visible');
+      reportPreview.classList.add('visible');
     });
 
     document.getElementById('resetPlan').addEventListener('click', () => {
@@ -464,7 +714,11 @@ python -m http.server 4174</pre>
       draftStatus.className = 'tag amber';
       synthesisStatus.textContent = 'queued';
       synthesisStatus.className = 'tag gray';
+      planSummary.classList.remove('visible');
+      reportPreview.classList.remove('visible');
     });
+
+    updateProgress();
   </script>
 </body>
 </html>

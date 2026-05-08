@@ -43,11 +43,15 @@ required for the public sample.
 ## Suggested Demo Script
 
 1. Open **Getting Started** and read the public/private boundary notice.
-2. Open **Workbench**, click **Preview plan**, then click **Approve draft step**.
-3. Open **Runtime** to see the desktop supervisor concept.
-4. Open **Interactions** to see how imported assistant sessions are represented.
-5. Open **Models** to review the local model policy sample.
-6. Open **Knowledge** to see the vault graph and database-only draft concept.
+2. Click **Start tour** or use the sidebar. The demo progress bar marks each
+   screen you have visited.
+3. Open **Workbench**, click **Preview plan**, then click **Approve draft step**.
+4. Use **Reset demo** to clear the fake Workbench state.
+5. Open **Runtime** to see the desktop supervisor concept.
+6. Open **Interactions** to see how imported assistant sessions are represented.
+7. Open **Dashboard** to see fake operational metrics.
+8. Open **Models** to review the local model policy sample.
+9. Open **Knowledge** to see the vault graph and database-only draft concept.
 
 Every action is browser-local and fake. Nothing is persisted outside the current
 page session.
