@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>NoveaCockpit Sample GUI</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, Arial, sans-serif;
+      color: #172033;
+      background: #f4f7fb;
+    }
+    .app { display: grid; grid-template-columns: 260px 1fr; min-height: 100vh; }
+    .sidebar {
+      background: #101828;
+      color: #f9fafb;
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+    .brand { display: flex; align-items: center; gap: 12px; font-weight: 800; font-size: 19px; }
+    .mark {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #34d399, #38bdf8);
+      display: grid;
+      place-items: center;
+      color: #082f49;
+      font-weight: 900;
+    }
+    .nav { display: grid; gap: 8px; }
+    .nav button {
+      border: 0;
+      background: transparent;
+      color: #cbd5e1;
+      padding: 11px 12px;
+      border-radius: 8px;
+      text-align: left;
+      cursor: pointer;
+      font-weight: 700;
+    }
+    .nav button.active { background: #1e293b; color: #ffffff; }
+    main { padding: 26px; overflow: auto; }
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      align-items: flex-start;
+      margin-bottom: 22px;
+    }
+    h1 { margin: 0; font-size: 28px; letter-spacing: 0; }
+    .subtitle { color: #64748b; margin-top: 6px; max-width: 760px; }
+    .grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 16px; }
+    .card {
+      background: #ffffff;
+      border: 1px solid #dbe3ef;
+      border-radius: 8px;
+      padding: 16px;
+      box-shadow: 0 10px 28px rgba(15, 23, 42, 0.05);
+    }
+    .span-3 { grid-column: span 3; }
+    .span-4 { grid-column: span 4; }
+    .span-5 { grid-column: span 5; }
+    .span-7 { grid-column: span 7; }
+    .span-8 { grid-column: span 8; }
+    .span-12 { grid-column: span 12; }
+    .metric { color: #64748b; font-size: 12px; font-weight: 800; text-transform: uppercase; }
+    .value { font-size: 26px; font-weight: 900; margin-top: 8px; }
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      border-radius: 999px;
+      padding: 4px 8px;
+      font-size: 12px;
+      font-weight: 800;
+      background: #e0f2fe;
+      color: #075985;
+    }
+    .tag.green { background: #dcfce7; color: #166534; }
+    .tag.amber { background: #fef3c7; color: #92400e; }
+    .tag.red { background: #fee2e2; color: #991b1b; }
+    table { width: 100%; border-collapse: collapse; }
+    th, td { padding: 10px 8px; border-bottom: 1px solid #e2e8f0; text-align: left; font-size: 13px; }
+    th { color: #64748b; font-size: 11px; text-transform: uppercase; }
+    .timeline { display: grid; gap: 10px; }
+    .step { display: grid; grid-template-columns: 120px 1fr auto; gap: 12px; align-items: center; padding: 11px; border: 1px solid #e2e8f0; border-radius: 8px; }
+    .bar { height: 8px; background: #e2e8f0; border-radius: 999px; overflow: hidden; }
+    .bar span { display: block; height: 100%; background: #0ea5e9; }
+    textarea, select, input {
+      width: 100%;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      padding: 10px;
+      font: inherit;
+      background: #ffffff;
+    }
+    textarea { min-height: 120px; resize: vertical; }
+    .button {
+      border: 0;
+      background: #0f172a;
+      color: #ffffff;
+      border-radius: 8px;
+      padding: 10px 14px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+    .section { display: none; }
+    .section.active { display: block; }
+    .list { display: grid; gap: 10px; }
+    .item { padding: 12px; border: 1px solid #e2e8f0; border-radius: 8px; background: #f8fafc; }
+    @media (max-width: 900px) {
+      .app { grid-template-columns: 1fr; }
+      .sidebar { position: static; }
+      .span-3, .span-4, .span-5, .span-7, .span-8 { grid-column: span 12; }
+      .topbar { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand"><div class="mark">N</div><div>NoveaCockpit</div></div>
+      <nav class="nav">
+        <button class="active" data-page="workbench">Workbench</button>
+        <button data-page="runtime">Runtime</button>
+        <button data-page="interactions">Interactions</button>
+        <button data-page="dashboard">Dashboard</button>
+        <button data-page="models">Models</button>
+        <button data-page="knowledge">Knowledge</button>
+      </nav>
+    </aside>
+    <main>
+      <section id="workbench" class="section active">
+        <div class="topbar">
+          <div><h1>Agent Workbench</h1><p class="subtitle">Plan, approve, and audit local agent runs with fake sample data.</p></div>
+          <span class="tag green">Local demo</span>
+        </div>
+        <div class="grid">
+          <div class="card span-5">
+            <div class="metric">Goal</div>
+            <textarea>Summarize the latest imported interactions and recommend safer agent instructions.</textarea>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px">
+              <select><option>Sample Project</option></select>
+              <select><option>qwen3:14b local</option></select>
+            </div>
+            <button class="button" style="margin-top:12px">Preview plan</button>
+          </div>
+          <div class="card span-7">
+            <div class="metric">Run Plan</div>
+            <div class="timeline" style="margin-top:12px">
+              <div class="step"><strong>Plan</strong><div>Build a safe local execution outline.</div><span class="tag green">done</span></div>
+              <div class="step"><strong>Context</strong><div>Read imported fake interaction summaries.</div><span class="tag green">done</span></div>
+              <div class="step"><strong>Draft</strong><div>Create a database-only recommendation report.</div><span class="tag amber">approval</span></div>
+              <div class="step"><strong>Synthesis</strong><div>Return copyable instructions and audit notes.</div><span class="tag">queued</span></div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section id="runtime" class="section">
+        <div class="topbar"><div><h1>Runtime</h1><p class="subtitle">Desktop supervisor and local provider status preview.</p></div><span class="tag green">Healthy</span></div>
+        <div class="grid">
+          <div class="card span-3"><div class="metric">API</div><div class="value">Healthy</div></div>
+          <div class="card span-3"><div class="metric">Desktop</div><div class="value">Tray ready</div></div>
+          <div class="card span-3"><div class="metric">Ollama</div><div class="value">Detected</div></div>
+          <div class="card span-3"><div class="metric">Model</div><div class="value">14B</div></div>
+          <div class="card span-12"><div class="metric">Supervisor Events</div><div class="list"><div class="item">Window close hides to tray.</div><div class="item">API restart is bounded and audited.</div><div class="item">No browser preview is used in normal desktop mode.</div></div></div>
+        </div>
+      </section>
+      <section id="interactions" class="section">
+        <div class="topbar"><div><h1>Interactions</h1><p class="subtitle">Mirror assistant sessions and generate local reports from approved imports.</p></div><span class="tag amber">Sample data</span></div>
+        <div class="grid">
+          <div class="card span-4"><div class="metric">Imported sessions</div><div class="value">24</div></div>
+          <div class="card span-4"><div class="metric">Tool calls</div><div class="value">71</div></div>
+          <div class="card span-4"><div class="metric">Reports</div><div class="value">8</div></div>
+          <div class="card span-12"><table><thead><tr><th>Source</th><th>Session</th><th>Status</th><th>Last activity</th></tr></thead><tbody><tr><td>Codex</td><td>Desktop UX planning</td><td><span class="tag green">Imported</span></td><td>Today</td></tr><tr><td>Claude</td><td>Validation handoff</td><td><span class="tag green">Imported</span></td><td>Today</td></tr></tbody></table></div>
+        </div>
+      </section>
+      <section id="dashboard" class="section">
+        <div class="topbar"><div><h1>Dashboard</h1><p class="subtitle">Operational overview for local agent activity.</p></div></div>
+        <div class="grid">
+          <div class="card span-3"><div class="metric">Runs</div><div class="value">1,248</div></div>
+          <div class="card span-3"><div class="metric">Tokens</div><div class="value">8.6M</div></div>
+          <div class="card span-3"><div class="metric">Approvals</div><div class="value">96</div></div>
+          <div class="card span-3"><div class="metric">Errors</div><div class="value">0.8%</div></div>
+          <div class="card span-12"><div class="bar"><span style="width:72%"></span></div><p class="subtitle">Sample local-model usage trend.</p></div>
+        </div>
+      </section>
+      <section id="models" class="section">
+        <div class="topbar"><div><h1>Models</h1><p class="subtitle">Approved local model inventory and routing preview.</p></div></div>
+        <div class="card"><table><thead><tr><th>Model</th><th>Provider</th><th>Policy</th><th>Status</th></tr></thead><tbody><tr><td>qwen3:14b</td><td>Ollama</td><td>Approved local</td><td><span class="tag green">Ready</span></td></tr><tr><td>large-cloud-model</td><td>External</td><td>Blocked for local demo</td><td><span class="tag red">Unavailable</span></td></tr></tbody></table></div>
+      </section>
+      <section id="knowledge" class="section">
+        <div class="topbar"><div><h1>Knowledge Graph</h1><p class="subtitle">Local vault graph preview with database-only drafts.</p></div></div>
+        <div class="grid">
+          <div class="card span-5"><div class="metric">Notes</div><div class="list"><div class="item">Agent architecture</div><div class="item">Routing policy design</div><div class="item">Evaluation checklist</div></div></div>
+          <div class="card span-7"><div class="metric">Related Notes</div><div class="list"><div class="item">Workbench planning references Runtime diagnostics.</div><div class="item">Interaction reports connect to model-routing decisions.</div><div class="item">Drafts stay in the database until manually applied.</div></div></div>
+        </div>
+      </section>
+    </main>
+  </div>
+  <script>
+    const buttons = Array.from(document.querySelectorAll('.nav button'));
+    const sections = Array.from(document.querySelectorAll('.section'));
+    buttons.forEach((button) => {
+      button.addEventListener('click', () => {
+        buttons.forEach((item) => item.classList.remove('active'));
+        sections.forEach((section) => section.classList.remove('active'));
+        button.classList.add('active');
+        document.getElementById(button.dataset.page).classList.add('active');
+      });
+    });
+  </script>
+</body>
+</html>
