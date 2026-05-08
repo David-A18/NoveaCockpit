@@ -1,8 +1,12 @@
 # Local Ollama Bridge Boundary
 
+Last updated: 2026-05-08.
+
 `ai-test-with-ollama` is a decoupled local testbed. It is used to validate local Ollama behavior, safe tool wrappers, run persistence, model inventory history, artifact audit UX, and packaging defaults.
 
 NoveaCockpit remains the primary app. The bridge is not a runtime dependency.
+
+The public sample GUI may describe the local model policy, but it must never call Ollama, list real local models, or expose local runtime state.
 
 ## Accepted Defaults
 

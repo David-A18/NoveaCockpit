@@ -2,7 +2,9 @@
 
 NoveaCockpit is a local-first desktop cockpit for agent work, model routing, interaction review, cost awareness, local knowledge, and audited tool use.
 
-This public mirror contains sanitized product and architecture notes only. The application source, desktop runtime, API implementation, tests, local data, transcripts, keys, reports, and operational configuration remain private.
+This public mirror contains sanitized product notes and a fake-data sample GUI only. The application source, desktop runtime, API implementation, tests, local data, transcripts, keys, reports, and operational configuration remain private.
+
+Latest validated public mirror baseline before this docs refresh: `b51566b`.
 
 ## Public Materials
 
@@ -10,6 +12,7 @@ This public mirror contains sanitized product and architecture notes only. The a
 - High-level architecture
 - Local Ollama bridge coordination notes
 - Publication policy
+- Fake-data sample GUI and teaching guide
 
 ## Private Materials
 

@@ -3,6 +3,8 @@
 This is a static fake-data preview of the NoveaCockpit product shape. It is a
 public teaching/demo surface, not the private desktop app.
 
+Latest validated public mirror baseline before this docs refresh: `b51566b`.
+
 Clone or download the public repository, then open `index.html` directly:
 
 ```powershell
@@ -20,8 +22,9 @@ python -m http.server 4174
 
 Then open `http://127.0.0.1:4174`.
 
-The sample includes a Getting Started screen, fake Workbench interactions,
-Runtime status, Interactions, Dashboard, Models, and Knowledge views.
+The sample includes a Getting Started screen, tour progress, fake Workbench plan
+and approval states, Runtime status, Interactions, Dashboard, Models, and
+Knowledge views.
 
 Read [GUIDE.md](GUIDE.md) for the full install and walkthrough guide.
 

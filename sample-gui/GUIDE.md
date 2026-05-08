@@ -1,9 +1,12 @@
 # NoveaCockpit Sample GUI Guide
 
+Last updated: 2026-05-08. Latest validated public mirror baseline before this docs refresh: `b51566b`.
+
 ## What This Is
 
 The sample GUI is a static, fake-data preview of the NoveaCockpit product shape.
 It is meant for public exploration, screenshots, and onboarding conversations.
+It includes a guided tour, progress indicator, and fake Workbench actions.
 
 It is not the private desktop app. It does not connect to APIs, read local files,
 call Ollama, import transcripts, run agents, expose prompts, or include private

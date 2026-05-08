@@ -4,6 +4,8 @@ NoveaCockpit is a local-first desktop cockpit for agent work, model routing, int
 
 This public repository contains sanitized product material, a fake-data sample GUI, and space for public screenshots. The application source, API, desktop runtime, tests, migrations, local transcripts, reports, logs, model outputs, keys, and operational configuration are private.
 
+Latest validated public mirror baseline before this docs refresh: `b51566b`.
+
 ## Contents
 
 - `public/`: sanitized product and architecture notes.
@@ -15,7 +17,7 @@ This public repository contains sanitized product material, a fake-data sample G
 
 Open `sample-gui/index.html` locally to inspect the static preview. It does not call an API and contains fake data only.
 
-Read [sample-gui/GUIDE.md](sample-gui/GUIDE.md) for the install steps, optional local server command, screen-by-screen tour, and demo script.
+Read [sample-gui/GUIDE.md](sample-gui/GUIDE.md) for the install steps, optional local server command, screen-by-screen tour, and demo script. The current demo includes a Getting Started screen, tour progress, Workbench fake plan/approval states, Runtime, Interactions, Dashboard, Models, and Knowledge views.
 
 ## Repository Boundary
 

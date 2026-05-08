@@ -4,6 +4,8 @@
 
 NoveaCockpit uses a private-source/public-mirror model.
 
+Last updated: 2026-05-08. Latest validated public mirror baseline before this docs refresh: `b51566b`.
+
 The implementation stays local or private. Public Git content is limited to sanitized product documentation, roadmap material, architecture summaries, and small non-sensitive interface examples.
 
 The public mirror remote is public. Do not push the private source tree there.
@@ -18,6 +20,7 @@ The public mirror may include:
 - `License.md`
 - Sanitized product overview, roadmap, architecture, and coordination notes
 - Small examples that do not reveal proprietary runtime logic, credentials, operational defaults, or customer data
+- Reviewed screenshots under `sample-gui/images/` after private paths, prompts, transcripts, logs, tokens tied to real sessions, and local runtime details are redacted
 
 The public mirror must not include the live app implementation.
 
