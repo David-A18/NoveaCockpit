@@ -6,22 +6,48 @@
   <title>NoveaCockpit Sample GUI</title>
   <style>
     * { box-sizing: border-box; }
+    :root {
+      color-scheme: light;
+      --bg: #f4f7fb;
+      --panel: #ffffff;
+      --panel-soft: #f8fafc;
+      --ink: #172033;
+      --muted: #64748b;
+      --line: #dbe3ef;
+      --nav: #101828;
+      --nav-soft: #1e293b;
+      --blue: #0ea5e9;
+      --green: #16a34a;
+      --amber: #d97706;
+      --red: #dc2626;
+    }
     body {
       margin: 0;
       font-family: Inter, Arial, sans-serif;
-      color: #172033;
-      background: #f4f7fb;
+      color: var(--ink);
+      background: var(--bg);
     }
-    .app { display: grid; grid-template-columns: 260px 1fr; min-height: 100vh; }
+    button, textarea, select, input { font: inherit; }
+    .app {
+      display: grid;
+      grid-template-columns: 266px minmax(0, 1fr);
+      min-height: 100vh;
+    }
     .sidebar {
-      background: #101828;
+      background: var(--nav);
       color: #f9fafb;
       padding: 22px;
       display: flex;
       flex-direction: column;
       gap: 18px;
     }
-    .brand { display: flex; align-items: center; gap: 12px; font-weight: 800; font-size: 19px; }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+      font-size: 19px;
+    }
     .mark {
       width: 38px;
       height: 38px;
@@ -31,6 +57,15 @@
       place-items: center;
       color: #082f49;
       font-weight: 900;
+    }
+    .sidebar-note {
+      border: 1px solid rgba(203, 213, 225, 0.18);
+      border-radius: 8px;
+      padding: 12px;
+      color: #cbd5e1;
+      font-size: 12px;
+      line-height: 1.45;
+      background: rgba(15, 23, 42, 0.48);
     }
     .nav { display: grid; gap: 8px; }
     .nav button {
@@ -43,7 +78,8 @@
       cursor: pointer;
       font-weight: 700;
     }
-    .nav button.active { background: #1e293b; color: #ffffff; }
+    .nav button:hover,
+    .nav button.active { background: var(--nav-soft); color: #ffffff; }
     main { padding: 26px; overflow: auto; }
     .topbar {
       display: flex;
@@ -53,11 +89,23 @@
       margin-bottom: 22px;
     }
     h1 { margin: 0; font-size: 28px; letter-spacing: 0; }
-    .subtitle { color: #64748b; margin-top: 6px; max-width: 760px; }
-    .grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 16px; }
+    h2 { margin: 0 0 12px; font-size: 15px; }
+    p { margin: 0; }
+    a { color: #0369a1; font-weight: 700; }
+    .subtitle {
+      color: var(--muted);
+      margin-top: 6px;
+      max-width: 760px;
+      line-height: 1.45;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      gap: 16px;
+    }
     .card {
-      background: #ffffff;
-      border: 1px solid #dbe3ef;
+      background: var(--panel);
+      border: 1px solid var(--line);
       border-radius: 8px;
       padding: 16px;
       box-shadow: 0 10px 28px rgba(15, 23, 42, 0.05);
@@ -65,10 +113,16 @@
     .span-3 { grid-column: span 3; }
     .span-4 { grid-column: span 4; }
     .span-5 { grid-column: span 5; }
+    .span-6 { grid-column: span 6; }
     .span-7 { grid-column: span 7; }
     .span-8 { grid-column: span 8; }
     .span-12 { grid-column: span 12; }
-    .metric { color: #64748b; font-size: 12px; font-weight: 800; text-transform: uppercase; }
+    .metric {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
     .value { font-size: 26px; font-weight: 900; margin-top: 8px; }
     .tag {
       display: inline-flex;
@@ -79,24 +133,41 @@
       font-weight: 800;
       background: #e0f2fe;
       color: #075985;
+      white-space: nowrap;
     }
     .tag.green { background: #dcfce7; color: #166534; }
     .tag.amber { background: #fef3c7; color: #92400e; }
     .tag.red { background: #fee2e2; color: #991b1b; }
+    .tag.gray { background: #e2e8f0; color: #334155; }
     table { width: 100%; border-collapse: collapse; }
-    th, td { padding: 10px 8px; border-bottom: 1px solid #e2e8f0; text-align: left; font-size: 13px; }
-    th { color: #64748b; font-size: 11px; text-transform: uppercase; }
+    th, td {
+      padding: 10px 8px;
+      border-bottom: 1px solid #e2e8f0;
+      text-align: left;
+      font-size: 13px;
+      vertical-align: top;
+    }
+    th { color: var(--muted); font-size: 11px; text-transform: uppercase; }
     .timeline { display: grid; gap: 10px; }
-    .step { display: grid; grid-template-columns: 120px 1fr auto; gap: 12px; align-items: center; padding: 11px; border: 1px solid #e2e8f0; border-radius: 8px; }
+    .step {
+      display: grid;
+      grid-template-columns: 122px minmax(0, 1fr) auto;
+      gap: 12px;
+      align-items: center;
+      padding: 11px;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      background: #ffffff;
+    }
     .bar { height: 8px; background: #e2e8f0; border-radius: 999px; overflow: hidden; }
-    .bar span { display: block; height: 100%; background: #0ea5e9; }
+    .bar span { display: block; height: 100%; background: var(--blue); }
     textarea, select, input {
       width: 100%;
       border: 1px solid #cbd5e1;
       border-radius: 8px;
       padding: 10px;
-      font: inherit;
       background: #ffffff;
+      color: var(--ink);
     }
     textarea { min-height: 120px; resize: vertical; }
     .button {
@@ -108,15 +179,59 @@
       font-weight: 800;
       cursor: pointer;
     }
+    .button.secondary { background: #e2e8f0; color: #0f172a; }
+    .button.success { background: var(--green); }
+    .button-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
     .section { display: none; }
     .section.active { display: block; }
     .list { display: grid; gap: 10px; }
-    .item { padding: 12px; border: 1px solid #e2e8f0; border-radius: 8px; background: #f8fafc; }
-    @media (max-width: 900px) {
+    .item {
+      padding: 12px;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      background: var(--panel-soft);
+      line-height: 1.45;
+    }
+    .guide-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+    .mono {
+      font-family: "Cascadia Code", Consolas, monospace;
+      font-size: 12px;
+      background: #0f172a;
+      color: #e2e8f0;
+      padding: 10px;
+      border-radius: 8px;
+      overflow-x: auto;
+    }
+    .notice {
+      border: 1px solid #bae6fd;
+      background: #e0f2fe;
+      color: #075985;
+      border-radius: 8px;
+      padding: 12px;
+      margin-bottom: 16px;
+      line-height: 1.45;
+      font-weight: 700;
+    }
+    .progress-log {
+      min-height: 44px;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 12px;
+      background: #f8fafc;
+      color: #334155;
+      line-height: 1.45;
+    }
+    @media (max-width: 960px) {
       .app { grid-template-columns: 1fr; }
       .sidebar { position: static; }
-      .span-3, .span-4, .span-5, .span-7, .span-8 { grid-column: span 12; }
+      .span-3, .span-4, .span-5, .span-6, .span-7, .span-8 { grid-column: span 12; }
       .topbar { flex-direction: column; }
+      .guide-grid { grid-template-columns: 1fr; }
+      .step { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -124,8 +239,12 @@
   <div class="app">
     <aside class="sidebar">
       <div class="brand"><div class="mark">N</div><div>NoveaCockpit</div></div>
+      <div class="sidebar-note">
+        Public sample only. All data is fake. This page does not connect to an API, Ollama, local files, or the private app.
+      </div>
       <nav class="nav">
-        <button class="active" data-page="workbench">Workbench</button>
+        <button class="active" data-page="guide">Getting Started</button>
+        <button data-page="workbench">Workbench</button>
         <button data-page="runtime">Runtime</button>
         <button data-page="interactions">Interactions</button>
         <button data-page="dashboard">Dashboard</button>
@@ -134,7 +253,53 @@
       </nav>
     </aside>
     <main>
-      <section id="workbench" class="section active">
+      <div class="notice">
+        This is a static public preview for learning the product shape. It contains no private implementation, credentials, transcripts, logs, model outputs, or customer data.
+      </div>
+
+      <section id="guide" class="section active">
+        <div class="topbar">
+          <div>
+            <h1>Getting Started</h1>
+            <p class="subtitle">Use this sample GUI to understand the main NoveaCockpit workflows before seeing the private desktop app.</p>
+          </div>
+          <span class="tag green">Fake-data tour</span>
+        </div>
+        <div class="grid">
+          <div class="card span-6">
+            <h2>Install the public demo</h2>
+            <div class="list">
+              <div class="item">Download or clone the public repository.</div>
+              <div class="item">Open <strong>sample-gui/index.html</strong> in a browser.</div>
+              <div class="item">Optional: serve the folder locally for a browser-style URL.</div>
+            </div>
+            <pre class="mono">cd sample-gui
+python -m http.server 4174</pre>
+          </div>
+          <div class="card span-6">
+            <h2>Tour script</h2>
+            <div class="list">
+              <div class="item">Start in Workbench and preview a plan.</div>
+              <div class="item">Approve the fake database-only draft step.</div>
+              <div class="item">Check Runtime and Models to see the local-first boundary.</div>
+              <div class="item">Use Interactions and Knowledge to understand the review workflow.</div>
+            </div>
+          </div>
+          <div class="card span-12">
+            <h2>What this teaches</h2>
+            <div class="guide-grid">
+              <div class="item"><strong>Agent Workbench:</strong> local plans, approvals, and audit-friendly run status.</div>
+              <div class="item"><strong>Runtime:</strong> desktop health, local provider readiness, and bounded process behavior.</div>
+              <div class="item"><strong>Interactions:</strong> imported assistant sessions and safe review summaries.</div>
+              <div class="item"><strong>Models:</strong> local model policy, approved model limits, and blocked oversized/cloud paths.</div>
+              <div class="item"><strong>Knowledge:</strong> local vault context and database-only draft behavior.</div>
+              <div class="item"><strong>Privacy:</strong> public demo data is fabricated and independent from the private product.</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="workbench" class="section">
         <div class="topbar">
           <div><h1>Agent Workbench</h1><p class="subtitle">Plan, approve, and audit local agent runs with fake sample data.</p></div>
           <span class="tag green">Local demo</span>
@@ -142,24 +307,30 @@
         <div class="grid">
           <div class="card span-5">
             <div class="metric">Goal</div>
-            <textarea>Summarize the latest imported interactions and recommend safer agent instructions.</textarea>
+            <textarea id="goal">Summarize the latest imported interactions and recommend safer agent instructions.</textarea>
             <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px">
-              <select><option>Sample Project</option></select>
-              <select><option>qwen3:14b local</option></select>
+              <select><option>Sample Project</option><option>Support Bot</option><option>Research Desk</option></select>
+              <select><option>qwen3:14b local</option><option>mock-small</option></select>
             </div>
-            <button class="button" style="margin-top:12px">Preview plan</button>
+            <div class="button-row">
+              <button class="button" id="previewPlan">Preview plan</button>
+              <button class="button success" id="approveDraft">Approve draft step</button>
+              <button class="button secondary" id="resetPlan">Reset demo</button>
+            </div>
+            <div class="progress-log" id="workbenchLog" style="margin-top:12px">No sample action has been taken yet.</div>
           </div>
           <div class="card span-7">
             <div class="metric">Run Plan</div>
             <div class="timeline" style="margin-top:12px">
               <div class="step"><strong>Plan</strong><div>Build a safe local execution outline.</div><span class="tag green">done</span></div>
               <div class="step"><strong>Context</strong><div>Read imported fake interaction summaries.</div><span class="tag green">done</span></div>
-              <div class="step"><strong>Draft</strong><div>Create a database-only recommendation report.</div><span class="tag amber">approval</span></div>
-              <div class="step"><strong>Synthesis</strong><div>Return copyable instructions and audit notes.</div><span class="tag">queued</span></div>
+              <div class="step"><strong>Draft</strong><div>Create a database-only recommendation report.</div><span class="tag amber" id="draftStatus">approval</span></div>
+              <div class="step"><strong>Synthesis</strong><div>Return copyable instructions and audit notes.</div><span class="tag gray" id="synthesisStatus">queued</span></div>
             </div>
           </div>
         </div>
       </section>
+
       <section id="runtime" class="section">
         <div class="topbar"><div><h1>Runtime</h1><p class="subtitle">Desktop supervisor and local provider status preview.</p></div><span class="tag green">Healthy</span></div>
         <div class="grid">
@@ -167,37 +338,86 @@
           <div class="card span-3"><div class="metric">Desktop</div><div class="value">Tray ready</div></div>
           <div class="card span-3"><div class="metric">Ollama</div><div class="value">Detected</div></div>
           <div class="card span-3"><div class="metric">Model</div><div class="value">14B</div></div>
-          <div class="card span-12"><div class="metric">Supervisor Events</div><div class="list"><div class="item">Window close hides to tray.</div><div class="item">API restart is bounded and audited.</div><div class="item">No browser preview is used in normal desktop mode.</div></div></div>
+          <div class="card span-12">
+            <h2>Supervisor Events</h2>
+            <div class="list">
+              <div class="item">Window close hides to tray instead of stopping the runtime.</div>
+              <div class="item">API restart is bounded, visible, and audited.</div>
+              <div class="item">Normal desktop mode loads the app shell locally and does not require a development server.</div>
+            </div>
+          </div>
         </div>
       </section>
+
       <section id="interactions" class="section">
         <div class="topbar"><div><h1>Interactions</h1><p class="subtitle">Mirror assistant sessions and generate local reports from approved imports.</p></div><span class="tag amber">Sample data</span></div>
         <div class="grid">
           <div class="card span-4"><div class="metric">Imported sessions</div><div class="value">24</div></div>
           <div class="card span-4"><div class="metric">Tool calls</div><div class="value">71</div></div>
           <div class="card span-4"><div class="metric">Reports</div><div class="value">8</div></div>
-          <div class="card span-12"><table><thead><tr><th>Source</th><th>Session</th><th>Status</th><th>Last activity</th></tr></thead><tbody><tr><td>Codex</td><td>Desktop UX planning</td><td><span class="tag green">Imported</span></td><td>Today</td></tr><tr><td>Claude</td><td>Validation handoff</td><td><span class="tag green">Imported</span></td><td>Today</td></tr></tbody></table></div>
+          <div class="card span-12">
+            <table>
+              <thead><tr><th>Source</th><th>Session</th><th>Status</th><th>Last activity</th></tr></thead>
+              <tbody>
+                <tr><td>Codex</td><td>Desktop UX planning</td><td><span class="tag green">Imported</span></td><td>Today</td></tr>
+                <tr><td>Claude</td><td>Validation handoff</td><td><span class="tag green">Imported</span></td><td>Today</td></tr>
+                <tr><td>Local notes</td><td>Packaging checklist</td><td><span class="tag amber">Review</span></td><td>Yesterday</td></tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </section>
+
       <section id="dashboard" class="section">
-        <div class="topbar"><div><h1>Dashboard</h1><p class="subtitle">Operational overview for local agent activity.</p></div></div>
+        <div class="topbar"><div><h1>Dashboard</h1><p class="subtitle">Operational overview for local agent activity.</p></div><span class="tag gray">Demo metrics</span></div>
         <div class="grid">
           <div class="card span-3"><div class="metric">Runs</div><div class="value">1,248</div></div>
           <div class="card span-3"><div class="metric">Tokens</div><div class="value">8.6M</div></div>
           <div class="card span-3"><div class="metric">Approvals</div><div class="value">96</div></div>
           <div class="card span-3"><div class="metric">Errors</div><div class="value">0.8%</div></div>
-          <div class="card span-12"><div class="bar"><span style="width:72%"></span></div><p class="subtitle">Sample local-model usage trend.</p></div>
+          <div class="card span-12">
+            <h2>Sample local-model usage trend</h2>
+            <div class="bar"><span style="width:72%"></span></div>
+            <p class="subtitle">This bar is hard-coded sample data, not telemetry from a real installation.</p>
+          </div>
         </div>
       </section>
+
       <section id="models" class="section">
-        <div class="topbar"><div><h1>Models</h1><p class="subtitle">Approved local model inventory and routing preview.</p></div></div>
-        <div class="card"><table><thead><tr><th>Model</th><th>Provider</th><th>Policy</th><th>Status</th></tr></thead><tbody><tr><td>qwen3:14b</td><td>Ollama</td><td>Approved local</td><td><span class="tag green">Ready</span></td></tr><tr><td>large-cloud-model</td><td>External</td><td>Blocked for local demo</td><td><span class="tag red">Unavailable</span></td></tr></tbody></table></div>
-      </section>
-      <section id="knowledge" class="section">
-        <div class="topbar"><div><h1>Knowledge Graph</h1><p class="subtitle">Local vault graph preview with database-only drafts.</p></div></div>
+        <div class="topbar"><div><h1>Models</h1><p class="subtitle">Approved local model inventory and routing policy preview.</p></div><span class="tag amber">Policy sample</span></div>
         <div class="grid">
-          <div class="card span-5"><div class="metric">Notes</div><div class="list"><div class="item">Agent architecture</div><div class="item">Routing policy design</div><div class="item">Evaluation checklist</div></div></div>
-          <div class="card span-7"><div class="metric">Related Notes</div><div class="list"><div class="item">Workbench planning references Runtime diagnostics.</div><div class="item">Interaction reports connect to model-routing decisions.</div><div class="item">Drafts stay in the database until manually applied.</div></div></div>
+          <div class="card span-12">
+            <table>
+              <thead><tr><th>Model</th><th>Provider</th><th>Policy</th><th>Status</th></tr></thead>
+              <tbody>
+                <tr><td>qwen3:14b</td><td>Ollama</td><td>Approved local validation model</td><td><span class="tag green">Ready</span></td></tr>
+                <tr><td>gpt-oss:20b</td><td>Ollama</td><td>Upper local validation boundary</td><td><span class="tag amber">Review</span></td></tr>
+                <tr><td>large-cloud-model</td><td>External</td><td>Blocked for local demo</td><td><span class="tag red">Unavailable</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="card span-12">
+            <h2>Model policy notes</h2>
+            <div class="list">
+              <div class="item">Local validation stays at or below 20B parameters unless explicitly approved.</div>
+              <div class="item">The public sample does not pull, run, or contact local models.</div>
+              <div class="item">The private app can inspect local provider readiness when installed privately.</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="knowledge" class="section">
+        <div class="topbar"><div><h1>Knowledge Graph</h1><p class="subtitle">Local vault graph preview with database-only drafts.</p></div><span class="tag gray">Static preview</span></div>
+        <div class="grid">
+          <div class="card span-5">
+            <h2>Notes</h2>
+            <div class="list"><div class="item">Agent architecture</div><div class="item">Routing policy design</div><div class="item">Evaluation checklist</div></div>
+          </div>
+          <div class="card span-7">
+            <h2>Related Notes</h2>
+            <div class="list"><div class="item">Workbench planning references Runtime diagnostics.</div><div class="item">Interaction reports connect to model-routing decisions.</div><div class="item">Drafts stay in the database until manually applied.</div></div>
+          </div>
         </div>
       </section>
     </main>
@@ -205,13 +425,41 @@
   <script>
     const buttons = Array.from(document.querySelectorAll('.nav button'));
     const sections = Array.from(document.querySelectorAll('.section'));
+    const draftStatus = document.getElementById('draftStatus');
+    const synthesisStatus = document.getElementById('synthesisStatus');
+    const workbenchLog = document.getElementById('workbenchLog');
+
+    function setPage(page) {
+      buttons.forEach((item) => item.classList.toggle('active', item.dataset.page === page));
+      sections.forEach((section) => section.classList.toggle('active', section.id === page));
+    }
+
     buttons.forEach((button) => {
-      button.addEventListener('click', () => {
-        buttons.forEach((item) => item.classList.remove('active'));
-        sections.forEach((section) => section.classList.remove('active'));
-        button.classList.add('active');
-        document.getElementById(button.dataset.page).classList.add('active');
-      });
+      button.addEventListener('click', () => setPage(button.dataset.page));
+    });
+
+    document.getElementById('previewPlan').addEventListener('click', () => {
+      workbenchLog.textContent = 'Sample plan preview generated. No API, model, local file, or private runtime was contacted.';
+      draftStatus.textContent = 'approval';
+      draftStatus.className = 'tag amber';
+      synthesisStatus.textContent = 'queued';
+      synthesisStatus.className = 'tag gray';
+    });
+
+    document.getElementById('approveDraft').addEventListener('click', () => {
+      workbenchLog.textContent = 'Fake approval recorded in browser memory only. In the private app this action would be audited.';
+      draftStatus.textContent = 'approved';
+      draftStatus.className = 'tag green';
+      synthesisStatus.textContent = 'ready';
+      synthesisStatus.className = 'tag green';
+    });
+
+    document.getElementById('resetPlan').addEventListener('click', () => {
+      workbenchLog.textContent = 'Demo state reset.';
+      draftStatus.textContent = 'approval';
+      draftStatus.className = 'tag amber';
+      synthesisStatus.textContent = 'queued';
+      synthesisStatus.className = 'tag gray';
     });
   </script>
 </body>

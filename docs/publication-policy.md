@@ -6,13 +6,14 @@ NoveaCockpit uses a private-source/public-mirror model.
 
 The implementation stays local or private. Public Git content is limited to sanitized product documentation, roadmap material, architecture summaries, and small non-sensitive interface examples.
 
-The current `origin` remote, `https://github.com/David-A18/IA-APPs.git`, is public. Do not push the private source tree there.
+The public mirror remote is public. Do not push the private source tree there.
 
 ## Public Allowlist
 
 The public mirror may include:
 
 - `public/**`
+- `sample-gui/**`
 - `docs/publication-policy.md`
 - `License.md`
 - Sanitized product overview, roadmap, architecture, and coordination notes

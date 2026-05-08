@@ -15,6 +15,8 @@ This public repository contains sanitized product material, a fake-data sample G
 
 Open `sample-gui/index.html` locally to inspect the static preview. It does not call an API and contains fake data only.
 
+Read [sample-gui/GUIDE.md](sample-gui/GUIDE.md) for the install steps, optional local server command, screen-by-screen tour, and demo script.
+
 ## Repository Boundary
 
 The real app runs privately from a local desktop shell. This repository is only a public product/demo mirror.
